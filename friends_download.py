@@ -44,7 +44,7 @@ if __name__ == '__main__':
     try:
         season = int(input("Which season you want to download?\n"))
         if 0 < season < 11:
-            driver = webdriver.Chrome(executable_path=binary_path)#'/home/delixus/chromedriver')
+            driver = webdriver.Chrome(executable_path=binary_path)
             season = ['0' + str(season) if len(str(season)) == 1 else season]
             driver.get("http://s8.bitdl.ir/Series/friends/S" + str(season[0]) + "/")
             season_download()
