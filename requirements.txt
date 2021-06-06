@@ -1,0 +1,3 @@
+selenium~=3.141.0
+humanfriendly~=9.1
+chromedriver-py==91.0.4472.19
