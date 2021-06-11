@@ -7,5 +7,5 @@ Install the requirements to run the script using the command
 
     pip install -r requirements.txt
  
-Challeinges:
+Challenges:
     Increasing session timeout
