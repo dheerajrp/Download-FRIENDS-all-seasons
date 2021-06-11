@@ -1,42 +1,55 @@
 """
-The script below, downloads the chrome driver and by using selenium, it scraps the web page, where there are download mirrors of all the seasons
+The script below, downloads the chrome driver and by using selenium,
+it scraps the web page, where there are download mirrors of all the seasons
 of F.R.I.E.N.D.S.
 """
 import time
+
+from chromedriver_py import binary_path
+from humanfriendly import format_timespan
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from humanfriendly import format_timespan
-from chromedriver_py import binary_path
 
 
-def find_element_and_download(episodes, driver):
+def sleep_time(seconds):
     """
-
-    :param episodes: episodes in each season
-    :param driver: chromedriver version 91.0.4472.19
-    :return: Downloads all the episodes of the season to the default downloads folder on your computer
+    sleep for 5 seconds
     """
-    driver.find_element(By.XPATH, '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
+    time.sleep(seconds)
 
 
 def season_download():
     """
     Getting all the episodes in the season and finding the download mirror
     """
-    if season == 3 and season == 6:
+    if season in ('0' + str(3), '0' + str(6)):
         for episodes in range(2, 27):
-            find_element_and_download(episodes=episodes, driver=driver)
+            driver.implicitly_wait(5)
+            driver.find_element(By.XPATH,
+                                '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
+            sleep_time(seconds=5)
 
-    elif season == 9:
+    if season == '0' + str(9):
         for episodes in range(2, 25):
-            find_element_and_download(episodes=episodes, driver=driver)
+            driver.implicitly_wait(5)
+            driver.find_element(By.XPATH,
+                                '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
+            sleep_time(seconds=5)
 
-    elif season == 10:
+    if season == str(10):
         for episodes in range(2, 20):
-            find_element_and_download(episodes=episodes, driver=driver)
-    else:
+            driver.implicitly_wait(5)
+            driver.find_element(By.XPATH,
+                                '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
+            sleep_time(seconds=5)
+    if season in ('0' + str(1), '0' + str(2),
+                  '0' + str(4), '0' + str(5),
+                  '0' + str(7), '0' + str(8)):
         for episodes in range(2, 26):
-            find_element_and_download(episodes=episodes, driver=driver)
+            driver.implicitly_wait(5)
+            driver.find_element(By.XPATH,
+                                '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
+            sleep_time(seconds=5)
 
 
 if __name__ == '__main__':
@@ -44,12 +57,14 @@ if __name__ == '__main__':
     try:
         season = int(input("Which season you want to download?\n"))
         if 0 < season < 11:
-            driver = webdriver.Chrome(executable_path=binary_path)#'/home/delixus/chromedriver')
+            driver = webdriver.Chrome(executable_path=binary_path)
             season = ['0' + str(season) if len(str(season)) == 1 else season]
-            driver.get("http://s8.bitdl.ir/Series/friends/S" + str(season[0]) + "/")
+            season = season[0]
+            driver.get("http://s8.bitdl.ir/Series/friends/S" + str(season) + "/")
             season_download()
             end_time = time.time()
-            print("Season", season, "downloaded successfully. Total time taken to download the season", season, 'is',
+            print("Season", season, "downloaded successfully. "
+                                    "Total time taken to download the season", season, 'is',
                   format_timespan(end_time - start_time), "Enjoy with F.R.I.E.N.D.S 😄😄😄")
         else:
             print("Enter a valid season number from 1 to 10")
