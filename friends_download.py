@@ -22,29 +22,27 @@ def season_download():
     """
     Getting all the episodes in the season and finding the download mirror
     """
-    if season in ('0' + str(3), '0' + str(6)):
+    if season in ('03', '06'):
         for episodes in range(2, 27):
             driver.implicitly_wait(5)
             driver.find_element(By.XPATH,
                                 '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
             sleep_time(seconds=5)
 
-    if season == '0' + str(9):
+    if season == '09':
         for episodes in range(2, 25):
             driver.implicitly_wait(5)
             driver.find_element(By.XPATH,
                                 '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
             sleep_time(seconds=5)
 
-    if season == str(10):
+    if season == '10':
         for episodes in range(2, 20):
             driver.implicitly_wait(5)
             driver.find_element(By.XPATH,
                                 '/html/body/table/tbody/tr[' + str(episodes) + ']/td[1]/a').click()
             sleep_time(seconds=5)
-    if season in ('0' + str(1), '0' + str(2),
-                  '0' + str(4), '0' + str(5),
-                  '0' + str(7), '0' + str(8)):
+    if season in ('01', '02', '04', '05','07', '08'):
         for episodes in range(2, 26):
             driver.implicitly_wait(5)
             driver.find_element(By.XPATH,
